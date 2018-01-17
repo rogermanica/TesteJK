@@ -1,12 +1,22 @@
-node {
-	stage 'Checkout'
-		checkout scm
+pipeline {
+    agent any
 
-	stage 'Build'
-		bat 'nuget restore ProjetoExemplo.sln'
+    stages {
+        stage('Checkout') {
+            steps {
+	    	checkout scm
+	    }
+	}
+    	stage('Build') {
+            steps {
+                bat 'nuget restore ProjetoExemplo.sln'
 		bat "\"${tool 'MSBuild'}\" ProjetoExemplo.sln /p:Configuration=Release /p:Platform=\"Any CPU\" /p:ProductVersion=1.0.0.${env.BUILD_NUMBER}"
-
-	stage 'Archive'
-		archive 'ProjetoExemplo/bin/Release/**'
-
+            }
+        }
+        stage('Arquive') {
+            steps {
+                archive 'ProjetoExemplo/bin/Release/**'
+            }
+        }
+    }
 }
