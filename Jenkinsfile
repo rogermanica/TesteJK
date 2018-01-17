@@ -8,7 +8,7 @@ pipeline {
     }
     stage('Build') {
       steps {
-        bat("\"${WORKSPACE}\\tools\\nuget\\nuget.exe\" restore ${WORKSPACE}\\TesteProjeto\\ProjetoExemplo\\ProjetoExemplo.sln)
+        bat "${WORKSPACE}\\tools\\nuget\\nuget.exe\" restore ${WORKSPACE}\\TesteProjeto\\ProjetoExemplo\\ProjetoExemplo.sln
         bat "\"${tool 'MSBuild'}\" ProjetoExemplo.sln /p:Configuration=Release /p:Platform=\"Any CPU\" /p:ProductVersion=1.0.0.${env.BUILD_NUMBER}"
       }
     }
