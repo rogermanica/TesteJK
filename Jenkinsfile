@@ -13,7 +13,7 @@ pipeline {
     }
     stage('Generanting Publish') {
       steps {
-        bat "\"${tool 'MSBuild-default'}\" C:\\TesteProjeto\\TesteWeb\\TesteWeb.sln /p:DeployOnBuild=true /p:PublishProfile=Production"
+        bat "\"${tool 'MSBuild-default'}\" C:\\TesteProjeto\\TesteWeb\\TesteWeb.sln /p:PublishProfile=Production"
       }
     }
     stage('Finish') {
